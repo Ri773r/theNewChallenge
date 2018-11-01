@@ -1,13 +1,21 @@
 from django.shortcuts import render,redirect
-from .models import User
+from .models import User,Post
 from .forms import UserForm
 # Create your views here.
 def index(request):
     #登录了返回用户
+    admin = User.objects.get(name='monique')
+    posts = Post.objects.filter(author=admin)[:4]
     if request.session.get('is_login',None):
         username = request.session['user_name']
-        return render(request,'myblog/index.html',{'username':username})
-    return render(request,'myblog/index.html')
+        return render(request,'myblog/index.html',{'username':username,'posts':posts})
+    return render(request,'myblog/index.html',{'posts',posts})
+
+def posts(request):
+    return render(request,'myblog/posts.html')
+
+def post_details(request):
+    return render(request,'')
 
 def login(request):
     if request.session.get('is_login',None):

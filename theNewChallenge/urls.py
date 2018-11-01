@@ -23,4 +23,6 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path('register/',views.register,name='register'),
     path('logout/',views.logout,name='logout'),
+    path('posts/',views.posts,name='posts'),
+    path('posts/<int:post_pk>/',views.post_details,name='post_details'),
 ]
